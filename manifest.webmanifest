@@ -1,0 +1,16 @@
+{
+  "name": "MVAPP BLE Tool",
+  "short_name": "MVAPP BLE",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "../../mv_nvm.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

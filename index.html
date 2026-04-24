@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>MVAPP BLE Tool</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>MVAPP BLE Tool</h1>
+      <p>Web Bluetooth cho ESP32 (Service `ab00`, Write `ab01`, Notify `ab02`)</p>
+    </header>
+
+    <section class="card">
+      <h2>Kết nối</h2>
+      <div class="grid">
+        <label>
+          Tên thiết bị (prefix)
+          <input id="namePrefix" value="MVAPP" placeholder="MVAPP">
+        </label>
+        <label>
+          Service UUID
+          <input id="serviceUuid" value="0000ab00-0000-1000-8000-00805f9b34fb">
+        </label>
+        <label>
+          Write UUID (ab01)
+          <input id="writeUuid" value="0000ab01-0000-1000-8000-00805f9b34fb">
+        </label>
+        <label>
+          Notify UUID (ab02)
+          <input id="notifyUuid" value="0000ab02-0000-1000-8000-00805f9b34fb">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="btnCheck">Check BLE</button>
+        <button id="btnConnect" class="primary">Connect</button>
+        <button id="btnDisconnect" class="danger">Disconnect</button>
+      </div>
+      <div id="status" class="status">Chưa kết nối</div>
+    </section>
+
+    <section class="card">
+      <h2>Gửi frame</h2>
+      <p class="hint">Format: `[header0 header1 cmd len payload ... tail=16]`</p>
+      <div class="grid">
+        <label>
+          Header 0
+          <input id="header0" value="A6">
+        </label>
+        <label>
+          Header 1
+          <input id="header1" value="6A">
+        </label>
+        <label>
+          CMD
+          <input id="cmd" value="C0">
+        </label>
+        <label>
+          Payload (hex, cách nhau bởi space)
+          <input id="payloadHex" value="01">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="btnSendFrame" class="primary">Gửi frame</button>
+        <button id="btnSendText">Gửi text UTF-8</button>
+      </div>
+      <label>
+        Text gửi nhanh
+        <input id="textPayload" placeholder="Xin chào BLE">
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Command nhanh</h2>
+      <div class="actions two">
+        <button class="quick" data-cmd="CB" data-payload="03 03">CB 03 03</button>
+        <button class="quick" data-cmd="CC" data-payload="03 03">CC 03 03</button>
+        <button class="quick" data-cmd="C9" data-payload="">C9</button>
+        <button class="quick" data-cmd="AF" data-payload="">AF</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Log</h2>
+      <textarea id="logBox" readonly></textarea>
+      <div class="actions">
+        <button id="btnClearLog">Xóa log</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

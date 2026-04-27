@@ -119,7 +119,7 @@ function parseFrame(data) {
 }
 
 function ensureConnected() {
-  if (!device || !gattServer || !gattServer.connected || !writeChar || !notifyChar) {
+  if (!device || !gattServer || !gattServer.connected || !writeChar) {
     throw new Error("Chưa kết nối BLE.");
   }
 }
@@ -177,12 +177,24 @@ async function connectDevice() {
   gattServer = await device.gatt.connect();
   service = await gattServer.getPrimaryService(serviceUuid);
   writeChar = await service.getCharacteristic(writeUuid);
-  notifyChar = await service.getCharacteristic(notifyUuid);
+  if (notifyUuid === writeUuid) {
+    notifyChar = writeChar;
+  } else {
+    try {
+      notifyChar = await service.getCharacteristic(notifyUuid);
+    } catch (err) {
+      notifyChar = null;
+      log("Khong lay duoc notify characteristic, se tiep tuc voi write-only.");
+    }
+  }
 
-  if (notifyChar.properties.notify) {
+  if (notifyChar && notifyChar.properties && notifyChar.properties.notify && notifyChar.startNotifications) {
     await notifyChar.startNotifications();
     notifyChar.addEventListener("characteristicvaluechanged", onNotify);
     notifying = true;
+  } else {
+    notifying = false;
+    log("Thiet bi khong ho tro notify hoac notify UUID khong ton tai.");
   }
 
   setStatus("Đã kết nối: " + (device.name || "<không tên>"), "ok");

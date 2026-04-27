@@ -1,4 +1,4 @@
-const CACHE_NAME = "mvapp-ble-cache-v2";
+const CACHE_NAME = "mvapp-ble-cache-v3";
 const ASSETS = [
   "./index.html",
   "./styles.css",

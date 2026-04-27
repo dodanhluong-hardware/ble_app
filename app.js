@@ -164,9 +164,10 @@ async function connectDevice() {
     throw new Error("Thiếu UUID.");
   }
 
-  const options = namePrefix
-    ? { filters: [{ namePrefix, services: [serviceUuid] }] }
-    : { acceptAllDevices: true, optionalServices: [serviceUuid] };
+  const options = { acceptAllDevices: true, optionalServices: [serviceUuid] };
+  if (namePrefix) {
+    log("Dang quet tat ca thiet bi. Goi y: chon ten bat dau bang \"" + namePrefix + "\".");
+  }
 
   log("Mở hộp chọn thiết bị...");
   device = await navigator.bluetooth.requestDevice(options);

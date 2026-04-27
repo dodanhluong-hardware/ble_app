@@ -211,12 +211,20 @@ async function disconnectDevice() {
 
 async function writeBytes(data) {
   ensureConnected();
-
-  if (writeChar.properties.writeWithoutResponse && writeChar.writeValueWithoutResponse) {
+  const props = (writeChar && writeChar.properties) ? writeChar.properties : {};
+  if (props.writeWithoutResponse && typeof writeChar.writeValueWithoutResponse === "function") {
     await writeChar.writeValueWithoutResponse(data);
-  } else {
-    await writeChar.writeValue(data);
+    return;
   }
+  if (typeof writeChar.writeValue === "function") {
+    await writeChar.writeValue(data);
+    return;
+  }
+  if (typeof writeChar.writeValueWithResponse === "function") {
+    await writeChar.writeValueWithResponse(data);
+    return;
+  }
+  throw new Error("Characteristic khong ho tro write tren trinh duyet hien tai.");
 }
 
 function onNotify(event) {

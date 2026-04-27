@@ -1,8 +1,7 @@
-const CACHE_NAME = "mvapp-ble-cache-v4";
+const CACHE_NAME = "mvapp-ble-cache-v5";
 const ASSETS = [
   "./index.html",
   "./styles.css",
-  "./app.js",
   "./manifest.webmanifest"
 ];
 
@@ -10,6 +9,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -25,10 +25,17 @@ self.addEventListener("activate", (event) => {
       )
     )
   );
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  const reqUrl = new URL(event.request.url);
+  if (reqUrl.pathname.endsWith("/app.js")) {
+    event.respondWith(fetch(event.request));
     return;
   }
 

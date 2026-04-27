@@ -1,4 +1,5 @@
 "use strict";
+const APP_VERSION = "2026-04-27 14:58";
 
 let device = null;
 let gattServer = null;
@@ -310,4 +311,4 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-log("MVAPP BLE Tool sẵn sàng.");
+log("MVAPP BLE Tool san sang. Version " + APP_VERSION);

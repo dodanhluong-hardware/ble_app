@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8">
@@ -12,27 +12,27 @@
   <main class="app">
     <header class="hero">
       <h1>MVAPP BLE Tool</h1>
-      <p>Web Bluetooth cho ESP32 (demo gatt_server: Service `00ff`, Char `ff01`)</p>
+      <p>Web Bluetooth cho ESP32 (demo gatt_server: Service `AB00`, Write `AB01`, Notify `AB02`)</p>
     </header>
 
     <section class="card">
-      <h2>Kết nối</h2>
+      <h2>Káº¿t ná»‘i</h2>
       <div class="grid">
         <label>
-          Tên thiết bị (prefix)
-          <input id="namePrefix" value="ESP_GATTS" placeholder="ESP_GATTS">
+          TÃªn thiáº¿t bá»‹ (prefix)
+          <input id="namePrefix" value="MVAPP" placeholder="MVAPP">
         </label>
         <label>
           Service UUID
-          <input id="serviceUuid" value="000000ff-0000-1000-8000-00805f9b34fb">
+          <input id="serviceUuid" value="0000ab00-0000-1000-8000-00805f9b34fb">
         </label>
         <label>
-          Write UUID (ff01)
-          <input id="writeUuid" value="0000ff01-0000-1000-8000-00805f9b34fb">
+          Write UUID (ab01)
+          <input id="writeUuid" value="0000ab01-0000-1000-8000-00805f9b34fb">
         </label>
         <label>
-          Notify UUID (ff01)
-          <input id="notifyUuid" value="0000ff01-0000-1000-8000-00805f9b34fb">
+          Notify UUID (ab02)
+          <input id="notifyUuid" value="0000ab02-0000-1000-8000-00805f9b34fb">
         </label>
       </div>
       <div class="actions">
@@ -40,11 +40,11 @@
         <button id="btnConnect" class="primary">Connect</button>
         <button id="btnDisconnect" class="danger">Disconnect</button>
       </div>
-      <div id="status" class="status">Chưa kết nối</div>
+      <div id="status" class="status">ChÆ°a káº¿t ná»‘i</div>
     </section>
 
     <section class="card">
-      <h2>Gửi frame</h2>
+      <h2>Gá»­i frame</h2>
       <p class="hint">Format: `[header0 header1 cmd len payload ... tail=16]`</p>
       <div class="grid">
         <label>
@@ -60,17 +60,17 @@
           <input id="cmd" value="C0">
         </label>
         <label>
-          Payload (hex, cách nhau bởi space)
+          Payload (hex, cÃ¡ch nhau bá»Ÿi space)
           <input id="payloadHex" value="01">
         </label>
       </div>
       <div class="actions">
-        <button id="btnSendFrame" class="primary">Gửi frame</button>
-        <button id="btnSendText">Gửi text UTF-8</button>
+        <button id="btnSendFrame" class="primary">Gá»­i frame</button>
+        <button id="btnSendText">Gá»­i text UTF-8</button>
       </div>
       <label>
-        Text gửi nhanh
-        <input id="textPayload" placeholder="Xin chào BLE">
+        Text gá»­i nhanh
+        <input id="textPayload" placeholder="Xin chÃ o BLE">
       </label>
     </section>
 
@@ -88,7 +88,7 @@
       <h2>Log</h2>
       <textarea id="logBox" readonly></textarea>
       <div class="actions">
-        <button id="btnClearLog">Xóa log</button>
+        <button id="btnClearLog">XÃ³a log</button>
       </div>
     </section>
   </main>
@@ -96,3 +96,6 @@
   <script src="./app.js?v=20260427-1458"></script>
 </body>
 </html>
+
+
+
